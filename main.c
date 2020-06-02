@@ -2,7 +2,7 @@
 
 
 int main(){
-    printf("%s", "How are you?");
+    printf("%s\n", "How are you?");
     return -1;
 }
 
