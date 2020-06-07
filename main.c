@@ -3,138 +3,71 @@
 #include <stdlib.h>
 #include <errno.h>
 
-// Input / Output
+// Operators
 
 // Lesson Link: 
-// https://www.programiz.com/c-programming/c-input-output
-
-// ScanF tips! (It's not always safe!):
-// http://sekrit.de/webdocs/c/beginners-guide-away-from-scanf.html
+// https://www.programiz.com/c-programming/c-operators
+// - Bitwise Operators: https://www.programiz.com/c-programming/bitwise-operators
 
 
-void outputDemo();
-void inputDemo();
-void scanfDemo();
 
+void bitwiseOperatorsDemo();
 
 int main(){
-
-    // outputDemo();
-    // inputDemo();
-
-    scanfDemo();
+    bitwiseOperatorsDemo();
     return 0;
 }
 
-void scanfDemo(){
-    // Rule 1. scanf() is not for reading input, it's for parsing input!
-    // - never flush input stream too, it is undefined behaviour
+void bitwiseOperatorsDemo(){
 
-    // Rule 2. scanf() can be dangerous when used carelessly. Always use field
-    // widths with conversions that parse properly
-    char exampleName[40];
-    
-    // - We use 39 because C needs a 0 byte to append the end!
-    // printf("What is your name? ");
-    // scanf("%39s", exampleName);
-    // printf("Hello %s!\n", exampleName);
+    int a = 12;
+    int b = 25;
 
-    // Rule 3. Although scanf() format strings can look quite similar to printf() format strings,
-    // they often have different semantics!
-    // printf("What is your name(We take spaces now)? ");
-    // scanf("%39[^\n]s", exampleName);
-    // printf("Hello %s!\n", exampleName);
+    // --------------
+    // bitwise AND = &
+    // - returns 1 if bits are both 1, 0 otherwise
 
-    // - Using fgets()
-    // char fgetsInput[40];
-    // int size = sizeof(fgetsInput);
-    // printf("What is the tallest point on earth? ");
-    // if(fgets(fgetsInput, size, stdin)){
+    // 12 = 00001100
+    // 25 = 00011001
+    //ans = 00001000 = 8
+    printf("Bitwise & on 12 and 25 = %d\n", a&b);
 
-    //     // - strscpn allows us to replace a specific index within a string,
-    //     // in this case we can overwrite it with 0 to prevent /n
-    //     fgetsInput[strcspn(fgetsInput, "\n")] = 0;
-    //     printf("You thought it was: %s\n", fgetsInput);
-    // }
+    // --------------
+    // bitwise OR = |
+    // - returns 1 if either bits are 1, 0 otherwise
 
-    // - Using fgets to get integers
-    long a;
-    char buf[1024];
-    int success;
+    // 12 = 00001100
+    // 25 = 00011001
+    //ans = 00011101 = 29
+    printf("Bitwise | on 12 and 25 = %d\n", a|b);
 
-    do 
-    {
-        printf("Enter a number! ");
-        if(!fgets(buf, 1024, stdin)){
-            // input reading has failed!
-            return;
-        }
+    // --------------
+    // bitwise XOR(exclusive OR) = ^
+    // - returns 1 if corresponding bits are opposite, 0 otherwise
 
-        char *endptr;
-        errno = 0;
-        int base = 10;
-        a = strtol(buf, &endptr, base);
-        if(errno == ERANGE){
-            // Number is not within range!
-            printf("Number too large! / too small!\n");
-            success = 0;
-        }
-        else if(endptr == buf){
-            // Input couldn't be converted since nothing was read!
-            success = 0 ;
-        }
+    // 12 = 00001100
+    // 25 = 00011001
+    //ans = 00010101 = 21
+    printf("Bitwise ^ on 12 and 25 = %d\n", a^b);
 
-        else if(*endptr && *endptr != '\n'){
-            // the last character wasn't end of a string / newline
-            success = 0;
-        }
-        else{
-            // successfully read!
-            success = 1;
-        }
+    // ------------
+    // bitwise Complement = ~
+    // performs complement on numbers by taking its complement,
+    // flipping its bits, adding 1 and negating it
+    // ex. ~45 = -46
+    // generally: n's bitwise complement = -(n + 1)
+    int c = 45;
+    printf("Bitwise ~ on 45 = %d\n", ~c);
 
-    } while (!success);
-    printf("Your entered number! %ld\n", a);
+    // ------------
+    // bitwise shift operators:
+    // b >> n: shifts b bits to the right by n bits
+    // b << n: shifts b bits to the left by n bits
+    // ex. 12 >> 2 = 00001100 -> 00000011 = 3
+    // ex. 25 << 4 = 00011001 -> 110010000 = 400
+    printf("Bitwise 12 >> 2 = %d\n", 12 >> 2);
+    printf("Bitwise 25 << 4 = %d\n", 25 << 4);
 }
 
-void outputDemo(){
 
-    printf(" ---- Output Demo ---- \n");
-    printf("String output example!\n");
 
-    int sampleInteger = 2;
-    printf("Sample integer = %d\n", sampleInteger);
-
-    float sampleFloat = 2.2;
-    double sampleDouble = 33.45;
-    printf("Sample float = %f\n", sampleFloat);
-    printf("Sample double = %lf\n", sampleDouble);
-
-    char characterA = 'A';
-    printf("Sample character = %c\n", characterA);
-}
-
-void inputDemo(){
-    printf(" ---- Input Demo ---- \n");
-
-    // Note for scanf, you must enter the correct formatter and 
-    // the memory location of the variable to store!
-
-    int integerInput;
-    printf("Enter an integer: ");
-    scanf("%d", &integerInput);
-    printf("Your entered integer = %d\n", integerInput);
-
-    float floatInput;
-    double doubleInput;
-    printf("Enter a float, and then a double: ");
-    scanf("%f%lf", &floatInput, &doubleInput);
-    printf("You have entered float = %f, and double = %lf\n", floatInput, doubleInput);
-
-    // Bugged area over here!
-    char characterInput;
-    printf("Enter a character: ");
-    scanf("%c", &characterInput);
-    printf("You have entered character = %c\n", characterInput);
-
-}
