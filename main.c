@@ -4,49 +4,59 @@
 #include <string.h>
 
 // Lesson Links: 
-// - Switch/Break: https://www.programiz.com/c-programming/c-switch-case-statement
+// - goto statements: https://www.programiz.com/c-programming/c-goto-statement
 
 
 
 double getNumberInput();
-void switchDemo(int numberToGuess, int numberOfAttempts);
+void gotoDemo();
+
 int main(){
-    switchDemo(rand(), 20);
+    
+    gotoDemo(20);
+
     return -1;
 }
 
-void switchDemo(int numberToGuess, int numberOfAttempts){
+void gotoDemo(int numPositive){
 
-    printf("---- Guess the number game! ----\n");
+    // goto statements:
+    // Follows this structure:
+    // -----------------------
+    // goto [label]
+    // .
+    // .
+    // .
+    // [label]:
+    //      code here.
 
-    int isRightGuess = 0;
-    int iteration = 0;
-    do {
-        printf("Iteration %d ", iteration);
-        double guessedNumber = getNumberInput();
-        isRightGuess = (guessedNumber == numberToGuess);
-        switch (isRightGuess)
-        {
-        case 0:
-            if(guessedNumber > numberToGuess){
-                printf("Number is too large!\n");
-            }
-            else{
-                printf("Number is too small!\n");
-            }
-            break;
+    // when to use:
+    // - to jump out of nested loops
+    // why you shouldn't use it:
+    // - can cause buggy code
+    // - hard to follow
+    // 
+    // generally goto statements are rarely used in C programs
+    
+
+    printf("Enter %d positive numbers!\n", numPositive);
+    for (int i = 0; i < numPositive; i++){
         
-        default:
-            printf("You guessed correctly!\n");
-            break;
+        double num = getNumberInput();
+        if(num < 0){
+            goto negativeNumber;
+        }
+        else{
+            printf("You have entered: %f\n", num);
         }
 
-        iteration++;
+    }
 
-    } while(!isRightGuess && (iteration < numberOfAttempts));
-
-    printf("Out of attempts! The number was: %d\n", numberToGuess);
+negativeNumber:
+    printf("You have entered a negative number!\n");
+    return;
 }
+
 
 
 double getNumberInput(){
