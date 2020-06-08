@@ -4,32 +4,50 @@
 #include <string.h>
 
 // Lesson Links: 
-// - For Loops: https://www.programiz.com/c-programming/c-for-loop
+// - Switch/Break: https://www.programiz.com/c-programming/c-switch-case-statement
 
-void breakAndContinueDemo();
+
+
 double getNumberInput();
-
+void switchDemo(int numberToGuess, int numberOfAttempts);
 int main(){
-    breakAndContinueDemo();
+    switchDemo(rand(), 20);
     return -1;
 }
 
-void breakAndContinueDemo(){
-    double number = getNumberInput();
+void switchDemo(int numberToGuess, int numberOfAttempts){
 
-    for (int i = 0; i < number; i++){
+    printf("---- Guess the number game! ----\n");
 
-        if((number / 2) < i){
-            printf("We've past the halfway point!\n");
+    int isRightGuess = 0;
+    int iteration = 0;
+    do {
+        printf("Iteration %d ", iteration);
+        double guessedNumber = getNumberInput();
+        isRightGuess = (guessedNumber == numberToGuess);
+        switch (isRightGuess)
+        {
+        case 0:
+            if(guessedNumber > numberToGuess){
+                printf("Number is too large!\n");
+            }
+            else{
+                printf("Number is too small!\n");
+            }
+            break;
+        
+        default:
+            printf("You guessed correctly!\n");
             break;
         }
-        else{
-            printf("We aren't at the halfway point! We are at i = %d\n", i);
-            continue;
-        }
 
-    }
+        iteration++;
+
+    } while(!isRightGuess && (iteration < numberOfAttempts));
+
+    printf("Out of attempts! The number was: %d\n", numberToGuess);
 }
+
 
 double getNumberInput(){
     int success = 0;
