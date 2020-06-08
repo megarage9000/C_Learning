@@ -6,20 +6,37 @@
 // Lesson Links: 
 // - For Loops: https://www.programiz.com/c-programming/c-for-loop
 
-void forLoopDemo();
+void breakAndContinueDemo();
+double getNumberInput();
 
 int main(){
-    forLoopDemo();
+    breakAndContinueDemo();
     return -1;
 }
 
-void forLoopDemo(){
+void breakAndContinueDemo(){
+    double number = getNumberInput();
 
+    for (int i = 0; i < number; i++){
+
+        if((number / 2) < i){
+            printf("We've past the halfway point!\n");
+            break;
+        }
+        else{
+            printf("We aren't at the halfway point! We are at i = %d\n", i);
+            continue;
+        }
+
+    }
+}
+
+double getNumberInput(){
     int success = 0;
     double result;
     char buf[40];
     do{
-        printf("Enter a number to multiply itself: ");
+        printf("Enter a number: ");
         if(fgets(buf, sizeof(buf), stdin)){
             char *endptr;
             int base = 10;
@@ -40,18 +57,12 @@ void forLoopDemo(){
             }
 
         } else{
-            return;
+            return -1;
         }
     } while (!success);
 
-    for (int i = 0; i < 3; i++){
-        result *= result;
-    }
-
-    printf("Your number multiplied by itself 3 times: %lf\n", result);
-
+    return result;
 }
-
 
 
 
