@@ -4,33 +4,44 @@
 #include <errno.h>
 
 // Lesson Links:
-// - C Recursion: https://www.programiz.com/c-programming/c-recursion
+// - C Storage Class: https://www.programiz.com/c-programming/c-storage-class
+
+int globalInt = 5;
+
 
 double getNumberInput();
-void recursionDemo();
-int fibSum(int num);
-
+void storageClassDemo();
 int main(){
-    recursionDemo();
+    storageClassDemo();
+    storageClassDemo();
+    storageClassDemo();
     return -1;
 }
 
-void recursionDemo(){
-    printf("Enter a number for its fibonacci sum: ");
-    int num = (int)getNumberInput();
+void storageClassDemo(){
+    // Each variable in C has a storage class!
+    // There are 4 types:
+    // - automatic
+    //      - Are local variables and only exist in code bracket
+    // - external
+    //      - Can be used outside of its code bracket, and in the case of extern
+    //      keyword, can be used in other files
+    // - static
+    //      - The value of the variable persists until the end of the program
+    // - register
+    //      - Utilizes the actual registers for greater speed, although many 
+    //      compilers already have optimized quite efficiently
+    register int regInt = 20;
+    static int staticInt = 2;
+    printf("Register integer: %d\n", regInt);
+    printf("Static integer: %d\n", staticInt);
+    printf("Global integer: %d\n", globalInt);
 
-    int fibonacci = fibSum(num);
-    printf("The fibonacci sum of %d is: %d\n", num, fibonacci);
+    staticInt += 20;
+    globalInt ++;
 }
 
-int fibSum(int num){
-    if(num != 0){
-        return num + fibSum(num - 1);
-    }
-    else{
-        return num;
-    }
-}
+
 
 double getNumberInput(){
     int success = 0;
