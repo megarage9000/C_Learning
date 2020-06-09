@@ -4,13 +4,14 @@
 #include <errno.h>
 
 // Lesson Link:
-// - C Arrays: https://www.programiz.com/c-programming/c-arrays
+// - C Multi-Dimensional Arrays: https://www.programiz.com/c-programming/c-multi-dimensional-arrays
 
 double getNumberInput();
 void arraysDemo();
+void multiDArrayDemo();
 
 int main(){
-    arraysDemo();
+    multiDArrayDemo();
     return -1;
 }
 
@@ -28,6 +29,30 @@ void arraysDemo(){
     printf("Your array: \n");
     for(int i = 0; i < size; i++){
         printf(" Index %d: %d", i, intArray[i]);
+    }
+}
+
+void multiDArrayDemo(){
+    printf("How many arrays do you want?\n");
+    int numArrays = (int)getNumberInput();
+    printf("How big is each array?\n");
+    int arraySize = (int)getNumberInput();
+
+    int doubleArray[numArrays][arraySize];
+
+    for(int i = 0; i < numArrays; i++){
+        for(int j = 0; j < arraySize; j++){
+            doubleArray[i][j] = rand();
+        }
+    }
+
+    printf("Your randomly generated 2D array: \n");
+    for (int i = 0; i < numArrays; i++){
+        printf("Array #%d: \n", i);
+        for(int j = 0; j < arraySize; j++){
+            printf("Index #%d: %d ", j, doubleArray[i][j]);
+        }
+        printf("\n");
     }
 }
 
