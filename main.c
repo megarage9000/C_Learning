@@ -9,9 +9,10 @@
 double getNumberInput();
 void arraysDemo();
 void multiDArrayDemo();
+void printSingleArray(int array[], int sizeOfArray);
 
 int main(){
-    multiDArrayDemo();
+    arraysDemo();
     return -1;
 }
 
@@ -25,11 +26,7 @@ void arraysDemo(){
         int num = (int)getNumberInput();
         intArray[i] = num;
     }
-
-    printf("Your array: \n");
-    for(int i = 0; i < size; i++){
-        printf(" Index %d: %d", i, intArray[i]);
-    }
+    printSingleArray(intArray, size);
 }
 
 void multiDArrayDemo(){
@@ -54,6 +51,15 @@ void multiDArrayDemo(){
         }
         printf("\n");
     }
+}
+
+void printSingleArray(int array[], int sizeOfArray){
+
+    printf("Your array: \n");
+    for(int i = 0; i < sizeOfArray; i++){
+        printf("Index %d: %d ", i, array[i]);
+    }
+
 }
 
 double getNumberInput(){
