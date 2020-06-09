@@ -3,12 +3,42 @@
 #include <stdlib.h>
 #include <errno.h>
 
+// CLearning Pointers
+// Lesson Link: https://www.programiz.com/c-programming/c-pointers
+
 double getNumberInput();
+void pointersDemo();
+void printPointerAndInt(int * p, int c);
+
 
 int main(){
-    printf("%s\n", "How are you?");
+    pointersDemo();
     return -1;
 }
+
+void pointersDemo(){
+
+    int * p, c; // Declares an integer pointer p, and a normal integer c
+    c = 10;
+    p = &c;
+
+    printf("Integer variable's address: %p, ", &c);
+    printf("Integer vairable's content: %d\n", c);
+
+    printf("Pointer variable's address its pointing to: %p, ", p);
+    printf("Pointer variable's content its pointing to: %d\n", *p);
+
+    printf("Change the number of the variable!\n");
+    c = (int)getNumberInput();
+
+    printf("Integer variable's address: %p, ", &c);
+    printf("Integer vairable's content: %d\n", c);
+
+    printf("Pointer variable's address its pointing to: %p, ", p);
+    printf("Pointer variable's content its pointing to: %d\n", *p);
+}
+
+
 
 double getNumberInput(){
     int success = 0;
