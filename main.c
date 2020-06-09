@@ -3,11 +3,32 @@
 #include <stdlib.h>
 #include <errno.h>
 
+// Lesson Link:
+// - C Arrays: https://www.programiz.com/c-programming/c-arrays
+
 double getNumberInput();
+void arraysDemo();
 
 int main(){
-    printf("%s\n", "How are you?");
+    arraysDemo();
     return -1;
+}
+
+void arraysDemo(){
+    printf("How big is your array going to be?\n");
+    int size = (int)getNumberInput();
+
+    int intArray[size];
+    for(int i = 0; i < size; i++){
+        printf("Array index: %d\n", i);
+        int num = (int)getNumberInput();
+        intArray[i] = num;
+    }
+
+    printf("Your array: \n");
+    for(int i = 0; i < size; i++){
+        printf(" Index %d: %d", i, intArray[i]);
+    }
 }
 
 double getNumberInput(){
