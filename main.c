@@ -4,35 +4,33 @@
 #include <errno.h>
 
 // Lesson Links:
-// C User-Defined Functions: https://www.programiz.com/c-programming/c-user-defined-functions
-// C Function Types: https://www.programiz.com/c-programming/types-user-defined-functions
+// - C Recursion: https://www.programiz.com/c-programming/c-recursion
 
 double getNumberInput();
-void swapNumbers(int * a, int * b);
-void functionDemo();
+void recursionDemo();
+int fibSum(int num);
 
 int main(){
-    functionDemo();
+    recursionDemo();
     return -1;
 }
 
-void swapNumbers(int * a, int * b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+void recursionDemo(){
+    printf("Enter a number for its fibonacci sum: ");
+    int num = (int)getNumberInput();
+
+    int fibonacci = fibSum(num);
+    printf("The fibonacci sum of %d is: %d\n", num, fibonacci);
 }
 
-void functionDemo(){
-    printf("Enter a number: ");
-    int a = (int)getNumberInput();
-    printf("Enter a number to swap the first one with: ");
-    int b = (int)getNumberInput();
-
-    printf("Before swapping: A = %d, B = %d\n", a, b);
-    swapNumbers(&a, &b);
-    printf("After swapping: A = %d, B = %d\n", a, b);
+int fibSum(int num){
+    if(num != 0){
+        return num + fibSum(num - 1);
+    }
+    else{
+        return num;
+    }
 }
-
 
 double getNumberInput(){
     int success = 0;
