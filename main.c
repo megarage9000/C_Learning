@@ -7,36 +7,56 @@
 // Lesson Link: https://www.programiz.com/c-programming/c-pointers
 
 double getNumberInput();
-void pointersDemo();
-void printPointerAndInt(int * p, int c);
+void arraysAndPointers(int arraySize);
 
 
 int main(){
-    pointersDemo();
+    arraysAndPointers(5);
     return -1;
 }
 
-void pointersDemo(){
+void arraysAndPointers(int arraySize){
+    int * elementPointer;
+    int array[arraySize];
 
-    int * p, c; // Declares an integer pointer p, and a normal integer c
-    c = 10;
-    p = &c;
+    printf("Make an array of numbers! You have %d numbers to enter\n", arraySize);
 
-    printf("Integer variable's address: %p, ", &c);
-    printf("Integer vairable's content: %d\n", c);
+    for (int i = 0; i < arraySize; i++){
+        array[i] = (int)getNumberInput();
+    }
 
-    printf("Pointer variable's address its pointing to: %p, ", p);
-    printf("Pointer variable's content its pointing to: %d\n", *p);
+    printf("Addresses per array element!\n");
 
-    printf("Change the number of the variable!\n");
-    c = (int)getNumberInput();
+    for(int i = 0; i < arraySize; i++){
+        printf("*(array + %d) = %d\n", i, *(array + i));
+    }
 
-    printf("Integer variable's address: %p, ", &c);
-    printf("Integer vairable's content: %d\n", c);
+    printf("Enter a position of an element to access for pointer demonstration!\n");
 
-    printf("Pointer variable's address its pointing to: %p, ", p);
-    printf("Pointer variable's content its pointing to: %d\n", *p);
+    int success = 0;
+    int position;
+    do{
+        position = (int)getNumberInput();
+        success = (position >= 0 && position < arraySize);
+        if(!success){
+            printf("Index out of bounds! Try again\n");
+        }
+    } while(!success);
+
+    elementPointer = &array[position];
+
+    printf("Element pointer to end of array:\n");
+    int positionToEnd = arraySize - position;
+    for(int i = 0; i < positionToEnd; i++){
+        printf("*(elmentPointer + %d) = %d\n", i, *(elementPointer + i));
+    }
+
+    printf("Element pointer to beginning of array:\n");
+    for(int i = 0; i < position; i++){
+        printf("*(elmentPointer - %d) = %d\n", i, *(elementPointer - i));
+    }
 }
+
 
 
 
