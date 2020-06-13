@@ -3,60 +3,31 @@
 #include <stdlib.h>
 #include <errno.h>
 
-// CLearning Pointers
-// Lesson Link: https://www.programiz.com/c-programming/c-pointers
+// CLearning Pointers and Functions
+// Lesson Link: https://www.programiz.com/c-programming/c-pointer-functions
 
 double getNumberInput();
-void arraysAndPointers(int arraySize);
 
+void swapNumbers(int * a, int * b);
 
 int main(){
-    arraysAndPointers(5);
+    int a, b;
+    printf("Enter a value for variable a\n");
+    a = (int)getNumberInput();
+    printf("Enter a value for variable b\n");
+    b = (int)getNumberInput();
+
+    printf("Before swap: a = %d, b = %d\n", a, b);
+    swapNumbers(&a, &b);
+    printf("After swap: a = %d, b = %d\n", a, b);
     return -1;
 }
 
-void arraysAndPointers(int arraySize){
-    int * elementPointer;
-    int array[arraySize];
-
-    printf("Make an array of numbers! You have %d numbers to enter\n", arraySize);
-
-    for (int i = 0; i < arraySize; i++){
-        array[i] = (int)getNumberInput();
-    }
-
-    printf("Addresses per array element!\n");
-
-    for(int i = 0; i < arraySize; i++){
-        printf("*(array + %d) = %d\n", i, *(array + i));
-    }
-
-    printf("Enter a position of an element to access for pointer demonstration!\n");
-
-    int success = 0;
-    int position;
-    do{
-        position = (int)getNumberInput();
-        success = (position >= 0 && position < arraySize);
-        if(!success){
-            printf("Index out of bounds! Try again\n");
-        }
-    } while(!success);
-
-    elementPointer = &array[position];
-
-    printf("Element pointer to end of array:\n");
-    int positionToEnd = arraySize - position;
-    for(int i = 0; i < positionToEnd; i++){
-        printf("*(elmentPointer + %d) = %d\n", i, *(elementPointer + i));
-    }
-
-    printf("Element pointer to beginning of array:\n");
-    for(int i = 0; i < position; i++){
-        printf("*(elmentPointer - %d) = %d\n", i, *(elementPointer - i));
-    }
+void swapNumbers(int * a, int * b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
-
 
 
 
