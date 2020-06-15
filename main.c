@@ -2,8 +2,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include "WannaBePokemon.h"
 
 double getNumberInput();
+
+
+
 
 int main(){
     printf("%s\n", "How are you?");
